@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import CurrencyDropDown from "./Dropdowns";
+import axios from "axios";
 
 const Converter = () => {
   const [currencies, setCurrencies] = useState([]);
@@ -13,8 +14,8 @@ const Converter = () => {
 
   const fetchCurrencies = async () => {
     try {
-      const res = await fetch("https://www.frankfurter.app/currencies");
-      const data = await res.json();    //  conversion answers to json format
+      const res = await axios.get("https://www.frankfurter.app/currencies");
+      const data = await res.data;    //  conversion answers to data format
       setCurrencies(Object.keys(data)); //  conversion  objects to array
     } catch (error) {
       console.error("Error fetching:", error);
@@ -32,7 +33,7 @@ const Converter = () => {
     }
 
     try {
-      const res = await fetch(
+      const res = await axios.get(
         `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`
       );
       const data = await res.json(); // conversion to json format
