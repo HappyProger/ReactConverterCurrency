@@ -36,7 +36,7 @@ const Converter = () => {
       const res = await axios.get(
         `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`
       );
-      const data = await res.json(); // conversion to json format
+      const data = await res.data(); // conversion to json format
       setConvertedAmount(data.rates[toCurrency] + " " + toCurrency); // converted amount + converted Currency 
     } catch (error) {
       console.error("Error fetching:", error);
