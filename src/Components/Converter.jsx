@@ -5,7 +5,7 @@ import CurrencyDropDown from "./Dropdowns";
 import axios from "axios";
 
 const Converter = () => {
-  const [currencies, setCurrencies] = useState([]);
+  const [currencies, setCurrencies] = useState([]); //array of currencies 
   const [amount, setAmount] = useState(1); // amount which must be converted
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("EUR");
@@ -27,6 +27,7 @@ const Converter = () => {
   }, []);
 
   console.log(currencies); // just checking dates
+  
   const convertCurrency = async () => {
     if (!amount) {
       return;
@@ -36,7 +37,7 @@ const Converter = () => {
       const res = await axios.get(
         `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`
       );
-      const data = await res.data(); // conversion to json format
+      const data = await res.data; // conversion to json format
       setConvertedAmount(data.rates[toCurrency] + " " + toCurrency); // converted amount + converted Currency 
     } catch (error) {
       console.error("Error fetching:", error);
